@@ -8,14 +8,14 @@ NUM_POINTS = 1000000;
 spmd
     pid = spmdIndex;
     NP = spmdSize;
-    NW = NP - 1;
     if pid == 1
-        points = NW * NUM_POINTS;
-        seeds = randi(10000, NW, 1);
+        points = NP * NUM_POINTS;
+        seeds = randi(10000, NP, 1);
         spmdBroadcast(pid, NUM_POINTS);
-        for i=1:NW
-            spmdSend(seeds(i,1),i+1);
+        for i=2:NW
+            spmdSend(seeds(i,1),i);
         end
+        seed = seeds(1,1);
         np_circ = spmdPlus(0,1);
         fprintf("Total=%d\n",np_circ);
         pi = 4 * np_circ / points;
@@ -42,3 +42,4 @@ spmd
     fprintf("Fin, PID = %d\n",pid);
 end
 
+rut
