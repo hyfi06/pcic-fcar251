@@ -8,6 +8,13 @@ NP = comm.Get_size() # PI_COMM_SIZE
 #SPMD
 
 if pid == 0: # Master
-    print("Master pid {pid}")
-else: # Workers
-    print("Worker pid {pid}")
+    print(f"Master pid {pid}")
+    data = [1,2,3,4]
+    req = comm.isend(data,1,1)
+    print(req.get_status())
+    data2 = req.wait()
+elif pid == 1: # Workers
+    print(f"Worker pid {pid}")
+    req = comm.irecv(source=0,tag=1)
+    data = req.wait()
+    print(data)
