@@ -1,13 +1,16 @@
 clear all;
+PROCESADORES = 8;
 p = gcp('nocreate'); % If no pool, do not create new one.
 if isempty(p)
-    parpool('Threads', 7);
+    c = parcluster;
+    c.NumWorkers = PROCESADORES;
+    c.parpool(PROCESADORES); % MPI_INIT
 end
 
 NUM_POINTS = 100000000;
 
 spmd
-    pid = spmdIndex;
+    pid = spmdIndex; % MPI_INDEX
     NP = spmdSize;
     if pid == 1
         t_init = tic;

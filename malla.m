@@ -19,8 +19,8 @@ end
 NED = [3, 3]; % Número de elementos 
 
 spmd(9)
-    pid = spmdIndex;
-    NP = spmdSize;
+    pid = spmdIndex; % MPI_Comm_rank 
+    NP = spmdSize; % MPI_Comm_size
     ind = id2ind(pid,NED);
     if prod(NED) ~= NP
         exit
