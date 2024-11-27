@@ -1,0 +1,2 @@
+1. Terminar programa para arriba y abajo Intercambio laplace
+2. Wilkinson ejemplo de pipeline computation cap 5, Solving a system of linear equation triangular, implementar.
