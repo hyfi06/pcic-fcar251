@@ -1,4 +1,4 @@
-% Malla carteciana
+% Toro carteciano
 
 % COL,ROW
 
@@ -18,7 +18,7 @@ end
 
 NPD = [3 3]; % Número de elementos COL ROW
 
-h = 1;
+H = 1;
 
 spmd(9)
     pid = spmdIndex; % MPI_Comm_rank 
@@ -51,10 +51,10 @@ spmd(9)
     % Envio arriba
     dato_up = spmdSendReceive(p_up, p_down, local);
 
-    % Envio arriba
+    % Envio abajo
     dato_down = spmdSendReceive(p_down, p_up, local);
 
-    laplace = h * (dato_right + dato_left + dato_up + dato_down);
+    laplace = H * (dato_right + dato_left + dato_up + dato_down);
     display(laplace)
 end
 
